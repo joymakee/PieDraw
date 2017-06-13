@@ -64,10 +64,10 @@
     //设置锚点，绕中心点旋转
     txtLayer.anchorPoint = CGPointMake(0.5, 0.5);
     txtLayer.string = text;
-    txtLayer.alignmentMode = [NSString stringWithFormat:@"right"];
+    txtLayer.alignmentMode = kCAAlignmentLeft;//[NSString stringWithFormat:@"right"];
     txtLayer.fontSize = 18;
     txtLayer.foregroundColor = [UIColor grayColor].CGColor;
-    
+    txtLayer.contentsScale = [UIScreen mainScreen].scale;//解决文字模糊 以Retina方式来渲染，防止画出来的文本像素化
     txtLayer.shadowColor = [UIColor yellowColor].CGColor;
     txtLayer.shadowOffset = CGSizeMake(5, 2);
     txtLayer.shadowRadius = 6;
@@ -76,7 +76,7 @@
     //layer没有center，用Position
     [txtLayer setPosition:CGPointMake(self.bounds.size.width/2, self.bounds.size.width/2)];
     //旋转
-    txtLayer.transform = CATransform3DMakeRotation(angel,0,0,1);
+    txtLayer.transform = CATransform3DMakeRotation(angel+M_PI,0,0,1);
     return txtLayer;
 }
 
